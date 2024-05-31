@@ -1,2 +1,2 @@
 # cats
-A vault application to store data securely in.
+A cryptography program to freely encrypt and decrypt files of your choosing
