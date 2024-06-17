@@ -18,6 +18,7 @@ fn main() {
             eprintln!("Error: {}", err);
             std::process::exit(1);
         }
+        println!("Encryption of {}, with passsword {}: sucessful", directory, password);
     }
     else if eord == "-d" {
         //  Decrypt directory
@@ -25,6 +26,7 @@ fn main() {
             eprintln!("Error: {}", err);
             std::process::exit(1);
         }
+        println!("Decryption of {}, with passsword {}: sucessful", directory, password);
     }
 
     
