@@ -102,19 +102,3 @@ pub fn decrypt_directory_recursive(directory: &str, password: &str) -> Result<()
     }
     Ok(())
 }
-
-
-// fn main() {
-    // println!();
-    // // Get the command-line arguments
-    // let args: Vec<String> = env::args().collect();
-
-    // let password: &str = &args[1];
-    // let directory: &str = &args[2];
-
-    // //  Decrypt directory
-    // if let Err(err) = decrypt_directory_recursive(directory, password) {
-    //     eprintln!("Error: {}", err);
-    //     std::process::exit(1);
-//     }
-// }
