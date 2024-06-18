@@ -1,6 +1,8 @@
 mod decrypt;
 mod encrypt;
 use std::env;
+use crate::decrypt::decrypt_directory_recursive;
+use crate::encrypt::encrypt_directory_recursive;
 
 fn main() {
     println!("welcome to cats, which is an acronym for something i forgot.");

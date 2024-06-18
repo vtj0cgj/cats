@@ -87,7 +87,7 @@ fn get_valid_key(key: &str) -> Vec<u8> {
     bytes
 }
 
-fn decrypt_directory_recursive(directory: &str, password: &str) -> Result<(), Box<dyn Error>> {
+pub fn decrypt_directory_recursive(directory: &str, password: &str) -> Result<(), Box<dyn Error>> {
     for entry in WalkDir::new(directory).follow_links(true) {
         let entry = entry?;
         if entry.file_type().is_file() {

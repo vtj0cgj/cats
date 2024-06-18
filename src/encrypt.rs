@@ -111,9 +111,9 @@ pub fn encrypt_file(input_file: &str, output_file: &str, password: &str) -> Resu
 }
 
 
-fn encrypt_directory_recursive(directory: &str, password: &str) -> Result<(), Box<dyn Error>> {
+pub fn encrypt_directory_recursive(directory: &str, password: &str) -> Result<(), Box<dyn Error>> {
     for entry in WalkDir::new(directory).follow_links(true) {
-        let entry = entry?;
+        let entry: walkdir::DirEntry = entry?;
         if entry.file_type().is_file() {
             let input_file_path = entry.path();
             let output_file_path = entry.path();
