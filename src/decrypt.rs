@@ -1,15 +1,18 @@
-use std::error::Error;
-use std::io::{self, Read, Write};
-use std::io::ErrorKind;
-use std::iter::repeat;
-use std::fs::File;
 use crypto::aead::AeadDecryptor;
 use crypto::aes_gcm::AesGcm;
-use walkdir::WalkDir;
 use std::env;
+use std::error::Error;
+use std::fs::File;
+use std::io::ErrorKind;
+use std::io::{self, Read, Write};
+use std::iter::repeat;
+use walkdir::WalkDir;
 
-
-pub fn decrypt_file(input_file: &str, output_file: &str, password: &str) -> Result<(), Box<dyn Error>> {
+pub fn decrypt_file(
+    input_file: &str,
+    output_file: &str,
+    password: &str,
+) -> Result<(), Box<dyn Error>> {
     let mut input_file = File::open(input_file)?;
     let mut encrypted_data = String::new();
     input_file.read_to_string(&mut encrypted_data)?;
@@ -20,7 +23,6 @@ pub fn decrypt_file(input_file: &str, output_file: &str, password: &str) -> Resu
 
     Ok(())
 }
-
 
 pub fn decrypt(iv_data_mac: &str, key: &str) -> Result<Vec<u8>, Box<dyn Error>> {
     let (iv, data, mac) = split_iv_data_mac(iv_data_mac)?;
