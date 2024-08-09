@@ -41,11 +41,15 @@ fn main() {
             );
         }
     }
-    if mode == "-p" || mode == "--passwords" {
+    else if mode == "-v" || mode == "--vaults" {
         let mkvault: &str = &args[2];
         if mkvault == "-mkv" || mkvault == "--makevault" {
             let newvaultname: &str = &args[3];
-            
+            let newvaultpassword: &str = &args[4];
+
         }
+    }
+    else {
+        eprintln!("oh noooooo")
     }
 }
