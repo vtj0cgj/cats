@@ -3,11 +3,10 @@ mod encrypt;
 use crate::decrypt::decrypt_directory_recursive;
 use crate::encrypt::encrypt_directory_recursive;
 use std::env;
+use colored::Colorize;
 
 fn main() {
-    println!("
-    welcome to cats\nthe world's only mildly acessible way to 'encrypt' files on your computer\nnow with Vaults!
-    ");
+    println!("{}\n{}\n{}", "welcome to cats".bright_purple(), "the world's only mildly acessible way to 'encrypt' files on your computer".green(), "now with Vaults!".yellow());
     println!();
 
     // Get the command-line arguments
@@ -50,6 +49,6 @@ fn main() {
         }
     }
     else {
-        eprintln!("oh noooooo")
+        eprintln!("{}", "ohhnoooo".red())
     }
 }
