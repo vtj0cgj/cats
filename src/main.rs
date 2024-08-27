@@ -49,6 +49,6 @@ fn main() {
         }
     }
     else {
-        eprintln!("{}", "ohhnoooo".red())
+        eprintln!("{}", "ohhnoo".red())
     }
 }
