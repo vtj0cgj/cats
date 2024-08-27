@@ -3,6 +3,7 @@ mod encrypt;
 use crate::decrypt::decrypt_directory_recursive;
 use crate::encrypt::encrypt_directory_recursive;
 use std::env;
+use std::fs::File;
 use colored::Colorize;
 
 fn main() {
@@ -43,9 +44,8 @@ fn main() {
     else if mode == "-v" || mode == "--vaults" {
         let mkvault: &str = &args[2];
         if mkvault == "-mkv" || mkvault == "--makevault" {
-            let newvaultname: &str = &args[3];
+            let newvaultpath: &str = &args[3];
             let newvaultpassword: &str = &args[4];
-
         }
     }
     else {
