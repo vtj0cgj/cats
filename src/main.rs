@@ -5,6 +5,14 @@ use crate::encrypt::encrypt_directory_recursive;
 use std::env;
 use std::fs::File;
 use colored::Colorize;
+use std::io::Write;
+
+fn makevault(dir: &str, vaultname: &str) -> std::io::Result<()> {
+    let mut file = File::create(dir)?;
+    let header: &[u8] = b""
+    file.write_all(header)?;
+    Ok(())
+}
 
 fn main() {
     println!("{}\n{}\n{}", "welcome to cats".bright_purple(), "the world's only mildly acessible way to 'encrypt' files on your computer".green(), "now with Vaults!".yellow());
@@ -46,6 +54,8 @@ fn main() {
         if mkvault == "-mkv" || mkvault == "--makevault" {
             let newvaultpath: &str = &args[3];
             let newvaultpassword: &str = &args[4];
+
+
         }
     }
     else {
