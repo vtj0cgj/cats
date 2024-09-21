@@ -7,10 +7,16 @@ use std::fs::File;
 use colored::Colorize;
 use std::io::Write;
 
+fn readvault(dir: &str, vaultname: &str) -> std::io::Result<()> {
+    let mut file = File::open(dir)?;
+    let header: &str = "CATS v0.0:DEV\n";
+}
+
+
 fn makevault(dir: &str, vaultname: &str) -> std::io::Result<()> {
     let mut file = File::create(dir)?;
-    let header: &[u8] = b""
-    file.write_all(header)?;
+    let header: &str = "CATS v0.0:DEV\n";
+    file.write_all(header.as_bytes())?;
     Ok(())
 }
 
@@ -54,8 +60,10 @@ fn main() {
         if mkvault == "-mkv" || mkvault == "--makevault" {
             let newvaultpath: &str = &args[3];
             let newvaultpassword: &str = &args[4];
-
-
+        }
+        else if mkvault == "-opn" || mkvault == "--openvault" {
+            let vaultpath: &str = &args[3];
+            let vaultpassword: &str = &args[4];
         }
     }
     else {
