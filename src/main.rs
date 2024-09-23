@@ -7,9 +7,10 @@ use std::fs::File;
 use colored::Colorize;
 use std::io::Write;
 
-fn readvault(dir: &str, vaultname: &str) -> std::io::Result<()> {
-    let mut file = File::open(dir)?;
-    let header: &str = "CATS v0.0:DEV\n";
+fn readvault(dir: &str, key: &str) -> Result<String, std::io::Error> {
+    let fileIN: str = std::fs::read_to_string(dir)?;
+    let fileOUT 
+    Ok((fileOUT))
 }
 
 
