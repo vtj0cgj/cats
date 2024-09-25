@@ -7,12 +7,6 @@ use std::fs::File;
 use colored::Colorize;
 use std::io::Write;
 
-fn readvault(dir: &str, key: &str) -> Result<String, std::io::Error> {
-    let file_in: &str = &std::fs::read_to_string(dir)?;
-    let file_out= decrypt::decrypt(file_in, key);
-    Ok((file_out))
-}
-
 
 fn makevault(dir: &str, vaultname: &str) -> std::io::Result<()> {
     let mut file = File::create(dir)?;
