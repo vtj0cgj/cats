@@ -8,9 +8,9 @@ use colored::Colorize;
 use std::io::Write;
 
 fn readvault(dir: &str, key: &str) -> Result<String, std::io::Error> {
-    let fileIN: str = std::fs::read_to_string(dir)?;
-    let fileOUT 
-    Ok((fileOUT))
+    let file_in: &str = &std::fs::read_to_string(dir)?;
+    let file_out= decrypt::decrypt(file_in, key);
+    Ok((file_out))
 }
 
 
@@ -61,10 +61,12 @@ fn main() {
         if mkvault == "-mkv" || mkvault == "--makevault" {
             let newvaultpath: &str = &args[3];
             let newvaultpassword: &str = &args[4];
+            makevault(newvaultpath, newvaultpassword);
         }
         else if mkvault == "-opn" || mkvault == "--openvault" {
             let vaultpath: &str = &args[3];
             let vaultpassword: &str = &args[4];
+
         }
     }
     else {
