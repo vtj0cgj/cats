@@ -1,6 +1,5 @@
 use crypto::aead::AeadDecryptor;
 use crypto::aes_gcm::AesGcm;
-use std::env;
 use std::error::Error;
 use std::fs::File;
 use std::io::ErrorKind;

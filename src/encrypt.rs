@@ -3,10 +3,9 @@ use std::io::{self, Read, Write};
 use std::io::ErrorKind;
 use std::iter::repeat;
 use std::fs::File;
-use crypto::aead::{AeadDecryptor, AeadEncryptor};
+use crypto::aead::AeadEncryptor;
 use crypto::aes_gcm::AesGcm;
 use rand::Rng;
-use std::env;
 use walkdir::WalkDir;
 
 /// orig must be a string of the form [hexNonce]/[hexCipherText]/[hexMac]. This
