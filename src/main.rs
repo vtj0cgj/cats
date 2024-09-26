@@ -12,6 +12,7 @@ fn makevault(dir: &str, vaultname: &str) -> std::io::Result<()> {
     let mut file = File::create(dir)?;
     let header: &str = "CATS v0.0:DEV\n";
     file.write_all(header.as_bytes())?;
+
     Ok(())
 }
 
@@ -42,7 +43,6 @@ fn main() {
             //  Decrypt directory
             if let Err(err) = decrypt_directory_recursive(directory, password) {
                 eprintln!("Error: {}", err);
-                std::process::exit(1);
             }
             println!(
                 "Decryption of\ndirectory: [{}]\npasssword: [{}]\nresult: sucessful",
@@ -51,16 +51,17 @@ fn main() {
         }
     }
     else if mode == "-v" || mode == "--vaults" {
-        let mkvault: &str = &args[2];
-        if mkvault == "-mkv" || mkvault == "--makevault" {
+        let whtvault: &str = &args[2];
+        if whtvault == "-mkv" || whtvault == "--makevault" {
             let newvaultpath: &str = &args[3];
             let newvaultpassword: &str = &args[4];
             makevault(newvaultpath, newvaultpassword);
         }
-        else if mkvault == "-opn" || mkvault == "--openvault" {
+        else if whtvault == "-opn" || whtvault == "--openvault" {
             let vaultpath: &str = &args[3];
             let vaultpassword: &str = &args[4];
-
+            let file_in: String = std::fs::read_to_string(vaultpath).expect("REASON");
+            decrypt::decrypt(&file_in, vaultpassword, true);
         }
     }
     else {

@@ -16,14 +16,14 @@ pub fn decrypt_file(
     let mut encrypted_data = String::new();
     input_file.read_to_string(&mut encrypted_data)?;
 
-    let decrypted_data = decrypt(&encrypted_data, password)?;
+    let decrypted_data = decrypt(&encrypted_data, password, false)?;
     let mut output_file = File::create(output_file)?;
     output_file.write_all(&decrypted_data)?;
 
     Ok(())
 }
 
-pub fn decrypt(iv_data_mac: &str, key: &str) -> Result<Vec<u8>, Box<dyn Error>> {
+pub fn decrypt(iv_data_mac: &str, key: &str, vault: bool) -> Result<Vec<u8>, Box<dyn Error>> {
     let (iv, data, mac) = split_iv_data_mac(iv_data_mac)?;
     let key = get_valid_key(key);
 
