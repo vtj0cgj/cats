@@ -41,6 +41,9 @@ pub fn decrypt(iv_data_mac: &str, key: &str, vault: bool) -> Result<Vec<u8>, Box
     if result {
         println!("Successful decryption");
     }
+    else if result && vault == true {
+        println!("Vault Decrypted at ();");
+    }
     println!("\nDecrypted data: {}", std::str::from_utf8(&dst).unwrap());
 
     Ok(dst)

@@ -7,6 +7,12 @@ use std::fs::File;
 use colored::Colorize;
 use std::io::Write;
 
+// let mut input_file = File::open(input_file)?;
+// let mut encrypted_data = String::new();
+// input_file.read_to_string(&mut encrypted_data)?;
+// let decrypted_data = decrypt(&encrypted_data, password, false)?;
+
+fn modifyvault(dir: &str, vaultname: &str) {}
 
 fn makevault(dir: &str, vaultname: &str) -> std::io::Result<()> {
     let mut file = File::create(dir)?;
@@ -55,16 +61,20 @@ fn main() {
         if whtvault == "-mkv" || whtvault == "--makevault" {
             let newvaultpath: &str = &args[3];
             let newvaultpassword: &str = &args[4];
-            makevault(newvaultpath, newvaultpassword);
+            let _ = makevault(newvaultpath, newvaultpassword);
         }
-        else if whtvault == "-opn" || whtvault == "--openvault" {
+        else if whtvault == "-rd" || whtvault == "--readvault" {
             let vaultpath: &str = &args[3];
             let vaultpassword: &str = &args[4];
             let file_in: String = std::fs::read_to_string(vaultpath).expect("REASON");
-            decrypt::decrypt(&file_in, vaultpassword, true);
+            let _ = decrypt::decrypt(&file_in, vaultpassword, true);
+        }
+        else if whtvault == "-md" || whtvault == "--modifyvault" {
+            let vaultpath: &str = &args[3];
+            let vaultpassword: &str = &args[4];
         }
     }
     else {
-        eprintln!("{}", "ohhno".red())
+        eprintln!("{}\n{}", "Invalid arguments:".red(), "syntax:\nR")
     }
 }
