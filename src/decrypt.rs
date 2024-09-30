@@ -12,8 +12,8 @@ pub fn decrypt_file(
     output_file: &str,
     password: &str,
 ) -> Result<(), Box<dyn Error>> {
-    let mut input_file = File::open(input_file)?;
-    let mut encrypted_data = String::new();
+    let mut input_file: File = File::open(input_file)?;
+    let mut encrypted_data: String = String::new();
     input_file.read_to_string(&mut encrypted_data)?;
 
     let decrypted_data = decrypt(&encrypted_data, password, false)?;

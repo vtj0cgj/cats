@@ -2,19 +2,33 @@ mod decrypt;
 mod encrypt;
 use crate::decrypt::decrypt_directory_recursive;
 use crate::encrypt::encrypt_directory_recursive;
+use colored::Colorize;
 use std::env;
 use std::fs::File;
-use colored::Colorize;
 use std::io::Write;
+use std::io::Read;
+use std::error::Error;
 
-// let mut input_file = File::open(input_file)?;
-// let mut encrypted_data = String::new();
-// input_file.read_to_string(&mut encrypted_data)?;
-// let decrypted_data = decrypt(&encrypted_data, password, false)?;
+fn modifyvault(dir: &str, password: &str) -> std::io::Result<()> {
+    let mut file: File = File::create(dir)?;
+    let mut encrypted_data: String = String::new();
+    file.read_to_string(&mut encrypted_data);
+    let decrypted_data = decrypt::decrypt(&encrypted_data, password, false);
+    Ok(())
+    // unfinushed function, not implemented.
+}
 
-fn modifyvault(dir: &str, vaultname: &str) {}
+fn openvault(dir: &str, password: &str) -> std::io::Result<()> {
+    let mut file: File = File::create(dir)?;
+    let mut encrypted_data: String = String::new();
+    file.read_to_string(&mut encrypted_data);
+    let decrypted_data: Result<Vec<u8>, Box<dyn Error>> = decrypt::decrypt(&encrypted_data, password, false);
+    println!("{:?}", decrypted_data);
+    Ok(())
+    // not implemented
+}
 
-fn makevault(dir: &str, vaultname: &str) -> std::io::Result<()> {
+fn makevault(dir: &str, password: &str) -> std::io::Result<()> {
     let mut file = File::create(dir)?;
     let header: &str = "CATS v0.0:DEV\n";
     file.write_all(header.as_bytes())?;
@@ -66,8 +80,11 @@ fn main() {
         else if whtvault == "-rd" || whtvault == "--readvault" {
             let vaultpath: &str = &args[3];
             let vaultpassword: &str = &args[4];
-            let file_in: String = std::fs::read_to_string(vaultpath).expect("REASON");
-            let _ = decrypt::decrypt(&file_in, vaultpassword, true);
+            let mut input_file: File = File::open(vaultpath).expect("L: failed to open vault");
+            let mut encrypted_data: String = String::new();
+            let _ = input_file.read_to_string(&mut encrypted_data);
+            let decrypted_data = decrypt::decrypt(&encrypted_data, vaultpassword, false);
+            println!("{:?}", decrypted_data);
         }
         else if whtvault == "-md" || whtvault == "--modifyvault" {
             let vaultpath: &str = &args[3];
