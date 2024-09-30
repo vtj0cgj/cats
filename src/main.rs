@@ -37,7 +37,7 @@ fn makevault(dir: &str, password: &str) -> std::io::Result<()> {
 }
 
 fn main() {
-    println!("{}\n{}\n{}", "welcome to cats".bright_purple(), "the world's only mildly acessible way to 'encrypt' files on your computer".green(), "now with Vaults!".yellow());
+    println!("{}\n{}\n{}\n{}", "cats".bright_purple(), "v0.0:DEV", "the world's only mildly acessible way to 'encrypt' files on your computer".green(), "now with Vaults!".yellow());
     println!();
 
     // Get the command-line arguments
