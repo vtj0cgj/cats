@@ -15,7 +15,7 @@ fn modifyvault(dir: &str, password: &str) -> std::io::Result<()> {
     file.read_to_string(&mut encrypted_data);
     let decrypted_data = decrypt::decrypt(&encrypted_data, password, false);
     Ok(())
-    // unfinushed function, not implemented.
+    // unfinished function, not implemented.
 }
 
 fn openvault(dir: &str, password: &str) -> std::io::Result<()> {
@@ -31,7 +31,9 @@ fn openvault(dir: &str, password: &str) -> std::io::Result<()> {
 fn makevault(dir: &str, password: &str) -> std::io::Result<()> {
     let mut file = File::create(dir)?;
     let header: &str = "CATS v0.0:DEV\n";
-    file.write_all(header.as_bytes())?;
+    let text: &str = "hail maynard";
+    let filebuffer: &str = &(header.to_owned() + text);
+    file.write_all(filebuffer.as_bytes())?;
 
     Ok(())
 }
@@ -43,7 +45,7 @@ fn main() {
     // Get the command-line arguments
     let args: Vec<String> = env::args().collect();
     let mode: &str = &args[1];
-    if mode == "-s" || mode == "--standard" {
+    if mode == "-s" || mode == "--standard" || mode == "" {
         let eord: &str = &args[2];
 
         let password: &str = &args[3];
@@ -77,6 +79,7 @@ fn main() {
             let newvaultpassword: &str = &args[4];
             let _ = makevault(newvaultpath, newvaultpassword);
         }
+
         else if whtvault == "-rd" || whtvault == "--readvault" {
             let vaultpath: &str = &args[3];
             let vaultpassword: &str = &args[4];
