@@ -93,6 +93,11 @@ fn main() {
             let vaultpath: &str = &args[3];
             let vaultpassword: &str = &args[4];
         }
+        else if whtvault == "-op" || whtvault == "--openvault" {
+            let vaultpath: &str = &args[3];
+            let vaultpassword: &str = &args[4];
+            openvault(vaultpath, vaultpassword);
+        }
     }
     else {
         eprintln!("{}\n{}", "Invalid arguments:".red(), "syntax:\nR")
