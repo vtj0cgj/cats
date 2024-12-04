@@ -32,6 +32,7 @@ fn makevault(dir: &str, password: &str) -> std::io::Result<()> {
     let mut file = File::create(dir)?;
     let header: &str = "CATS v0.0:DEV\n";
     let text: &str = "hail maynard";
+    let encrypted_text = encrypt::encrypt(text, password);
     let filebuffer: &str = &(header.to_owned() + text);
     file.write_all(filebuffer.as_bytes())?;
 
@@ -96,7 +97,7 @@ fn main() {
         else if whtvault == "-op" || whtvault == "--openvault" {
             let vaultpath: &str = &args[3];
             let vaultpassword: &str = &args[4];
-            openvault(vaultpath, vaultpassword);
+            let _ = openvault(vaultpath, vaultpassword);
         }
     }
     else {
